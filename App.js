@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
+import Task from "./src/Task";
 
 export default function App(){
 
   const [task, setTask] = useState('');
+  const [list, setList] = useState([
+    {
+      key: '1',
+      item: 'Study React Native'
+    },
+    {
+      key: '2',
+      item: 'Do apps'
+    }
+  ])
 
   function handleAddTask(){
     alert(task);
@@ -26,6 +37,14 @@ export default function App(){
           <FontAwesome name="plus" size={20} color='#a147'/>
         </TouchableOpacity>
       </View>
+
+      <FlatList 
+        style={styles.list}
+        data={list}
+        keyExtractor={item => item.key}
+        renderItem={({ item }) => <Task data={item}/>}
+      />
+
     </View>
   )
 }
@@ -67,5 +86,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 4
+  },
+  list: {
+    flex: 1,
+    backgroundColor: '#dfcccc',
+    paddingStart: '5%',
+    paddingEnd: '5%'
   }
 });
