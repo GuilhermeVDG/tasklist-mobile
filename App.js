@@ -6,19 +6,25 @@ import Task from "./src/Task";
 export default function App(){
 
   const [task, setTask] = useState('');
-  const [list, setList] = useState([
-    {
-      key: '1',
-      item: 'Study React Native'
-    },
-    {
-      key: '2',
-      item: 'Do apps'
-    }
-  ])
+  const [list, setList] = useState([]);
 
   function handleAddTask(){
-    alert(task);
+    if(task === '') return
+
+    const data = {
+      key: Date.now(),
+      item: task
+    }
+
+    setList(old => [data, ...old]);
+
+    setTask(''); 
+  }
+
+  function handleDelete(item){
+    const filterItem = list.filter(task => task.item !== item);
+
+    setList(filterItem);
   }
 
   return(
@@ -42,7 +48,7 @@ export default function App(){
         style={styles.list}
         data={list}
         keyExtractor={item => item.key}
-        renderItem={({ item }) => <Task data={item}/>}
+        renderItem={({ item }) => <Task data={item} deleteItem={ () => handleDelete(item.item)}/>}
       />
 
     </View>
