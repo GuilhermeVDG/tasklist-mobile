@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function App(){
-  const [name, setName] = useState('Guilherme');
 
-  function handleChangeName(){
-    setName('Vanderley');
-  }
-  
   return(
     <View style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
+      <Text style={styles.title}>To do List</Text>
 
-      <TouchableOpacity style={styles.button} onPress={handleChangeName}>
-        <Text style={styles.buttonText}>Mudar nome</Text>
-      </TouchableOpacity>
+      <View style={styles.containerInput}>
+        <TextInput placeholder="Digite uma nova tarefa..." style={styles.input}/>
+
+        <TouchableOpacity style={styles.buttonAdd}>
+          <FontAwesome name="plus" size={20} color='#a147'/>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -26,21 +26,35 @@ const styles = StyleSheet.create({
     paddingTop: 28
   },
   title: {
-    fontSize: 32,
-    color: '#121212',
+    fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center'
+    color: '#a147',
+    marginTop: '5%',
+    paddingLeft: '5%',
+    marginBottom: 12
   },
-  button: {
-    backgroundColor: 'blue',
-    height: 40,
-    justifyContent: 'center',
+  containerInput: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 44,
     alignItems: 'center',
-    marginTop: 30
+    justifyContent: 'center',
+    marginBottom: 22
   },
-  buttonText: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold'
+  input: {
+    width: '75%',
+    backgroundColor: '#DFCCCC',
+    height: 44,
+    borderRadius: 4,
+    paddingHorizontal: 8
+  },
+  buttonAdd: {
+    width: '15%',
+    height: 44,
+    backgroundColor: '#cead',
+    marginLeft: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 4
   }
-})
+});
