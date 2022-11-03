@@ -4,14 +4,25 @@ import { FontAwesome } from '@expo/vector-icons';
 
 export default function App(){
 
+  const [task, setTask] = useState('');
+
+  function handleAddTask(){
+    alert(task);
+  }
+
   return(
     <View style={styles.container}>
       <Text style={styles.title}>To do List</Text>
 
       <View style={styles.containerInput}>
-        <TextInput placeholder="Digite uma nova tarefa..." style={styles.input}/>
+        <TextInput
+          placeholder="Digite uma nova tarefa..."
+          style={styles.input}
+          value={task}
+          onChangeText={e => setTask(e)}
+        />
 
-        <TouchableOpacity style={styles.buttonAdd}>
+        <TouchableOpacity style={styles.buttonAdd} onPress={handleAddTask}>
           <FontAwesome name="plus" size={20} color='#a147'/>
         </TouchableOpacity>
       </View>
